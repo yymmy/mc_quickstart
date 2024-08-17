@@ -15,6 +15,10 @@ config.json内配置用户名以及对应的“配置文件夹”
 
 
 ### 2.复制“配置的数据库文件”
-路径：\Wuthering Waves Game\Client\Saved\LocalStorage
+游戏路径：\Wuthering Waves Game\Client\Saved\LocalStorage
 复制此文件夹中的内容，此处需要新建两个文件夹，分别对应了两个用户登录时所需要的配置文件（脚本挂机时一般是低配）
 
+
+### 3.整体复制到游戏目录内
+如图
+![image](https://github.com/user-attachments/assets/572922a9-5eed-4301-a68b-f8435634599b)
