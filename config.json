@@ -1,0 +1,20 @@
+{
+  "users": {
+    "mc": {
+      "copy_source_dir": "low",
+      "resolution": {
+        "ResolutionSizeX": "1600",
+        "ResolutionSizeY": "900",
+        "FullscreenMode": "2"
+      }
+    },
+    "YM": {
+      "copy_source_dir": "high",
+      "resolution": {
+        "ResolutionSizeX": "1920",
+        "ResolutionSizeY": "1080",
+        "FullscreenMode": "1"
+      }
+    }
+  }
+}
