@@ -118,15 +118,29 @@ def sync_folders(users):
 
 
 def sync_folders_logic(source_folder, target_folder):
-    source_mtime = os.path.getmtime(source_folder) if os.path.exists(source_folder) else 0
-    target_mtime = os.path.getmtime(target_folder) if os.path.exists(target_folder) else 0
+    source_file = os.path.join(source_folder, "KRSDKUserCache.json")
+    target_file = os.path.join(target_folder, "KRSDKUserCache.json")
+
+    if not os.path.exists(source_file) and not os.path.exists(target_file):
+        print(f"错误: 在两个文件夹中都找不到 KRSDKUserCache.json 文件。")
+        return
+
+    if os.path.exists(source_file):
+        source_mtime = os.path.getmtime(source_file)
+    else:
+        source_mtime = 0
+
+    if os.path.exists(target_file):
+        target_mtime = os.path.getmtime(target_file)
+    else:
+        target_mtime = 0
 
     if source_mtime > target_mtime:
-        shutil.copytree(source_folder, target_folder, dirs_exist_ok=True)
-        print(f"从 {source_folder} 同步到 {target_folder} 完成。")
+        shutil.copy2(source_file, target_file)
+        print(f"从 {source_file} 同步到 {target_file} 完成。")
     elif target_mtime > source_mtime:
-        shutil.copytree(target_folder, source_folder, dirs_exist_ok=True)
-        print(f"从 {target_folder} 同步到 {source_folder} 完成。")
+        shutil.copy2(target_file, source_file)
+        print(f"从 {target_file} 同步到 {source_file} 完成。")
     else:
         print("两个文件的修改时间相同，无需同步。")
 
