@@ -136,14 +136,27 @@ def sync_folders_logic(source_folder, target_folder):
         target_mtime = 0
 
     if source_mtime > target_mtime:
-        shutil.copy2(source_file, target_file)
-        print(f"从 {source_file} 同步到 {target_file} 完成。")
+        copy_entire_folder(source_folder, target_folder)
+        print(f"从 {source_folder} 同步到 {target_folder} 完成。")
     elif target_mtime > source_mtime:
-        shutil.copy2(target_file, source_file)
-        print(f"从 {target_file} 同步到 {source_file} 完成。")
+        copy_entire_folder(target_folder, source_folder)
+        print(f"从 {target_folder} 同步到 {source_folder} 完成。")
     else:
         print("两个文件的修改时间相同，无需同步。")
 
 
+def copy_entire_folder(src_folder, dest_folder):
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
+
+    for item in os.listdir(src_folder):
+        src_path = os.path.join(src_folder, item)
+        dest_path = os.path.join(dest_folder, item)
+
+        if os.path.isdir(src_path):
+            copy_entire_folder(src_path, dest_path)
+        else:
+            shutil.copy2(src_path, dest_path)
+            print(f"文件 {src_path} 已复制到 {dest_path}")
 if __name__ == "__main__":
     select_launcher()
